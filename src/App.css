@@ -1,0 +1,278 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.landing {
+  min-height: 180vh;
+  background-color: #000000;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.landing::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--bgimg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  opacity: 0.9; 
+  z-index: 0;
+}
+
+
+h1{
+  font-family: 'BBH Bartle', sans-serif;
+  font-size: 4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding-top: 20vh; 
+  
+  text-align: center;
+  margin: 0;
+  color: #ffffff;
+}
+
+.astronaut {
+  width: 100%;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 1rem; 
+}
+
+.astronaut img {
+  width: 60%;
+  max-width: 380px; 
+  height: auto; 
+  
+  object-fit: contain;
+  animation: floatUpDown 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatUpDown {
+  0% {
+    transform: translateY(15px);
+    
+  }
+  100% {
+    transform: translateY(-15px); 
+  }
+  
+}
+
+.constellation-grid {
+  position: fixed;  /*add more constellions make it absolute*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 0 6vw;
+  box-sizing: border-box;
+  z-index: 1; 
+  pointer-events: auto;
+}
+
+.grid-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10rem; 
+  width: 22%;
+}
+
+
+.center-column {
+  justify-content: flex-end;
+  padding-bottom: 1vh;
+}
+
+
+.constellation {
+  width: 100%;
+  max-width: 180px; 
+  height: auto;
+  opacity: 0; 
+  transition: opacity 1s ease-in-out, transform 0.5s ease-out;
+}
+
+
+.constellation:hover {
+  opacity: 1;
+  transform: scale(1.5);
+}
+
+.title, .astronaut {
+  position: relative;
+  z-index: 5; 
+  pointer-events: none;
+}
+
+/* --- HERO TRACK LAYOUT WHEN SCROLLED --- */
+
+/* Base container holding your initial title and astronaut */
+.hero-track {
+  position: relative;
+  width: 100%;
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* The vanishing transition: moves toward top-left corner and fades to invisible */
+.hero-track.scrolled {
+  opacity: 0;
+  transform: translate(-20vw, -15vh) scale(0.6);
+  pointer-events: none;
+}
+
+
+/* --- DYNAMIC NAVIGATION BAR --- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  
+  /* Space-between pushes the brand group to the left and links to the right */
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  
+  padding: 0 5vw;
+  box-sizing: border-box;
+  z-index: 100; /* Stays securely on top of scrolling content cards */
+  
+  /* Subtle dark glassmorphic frosting layer for layout visibility */
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.navbar.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* --- NAVBAR BRANDING ELEMENTS (Top Left Items) --- */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 20px; 
+}
+
+.nav-title {
+  font-family: 'BBH Bartle', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.nav-astronaut {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  animation: floatUpDown 3s ease-in-out infinite alternate;
+  
+}
+
+/* --- NAVBAR LINKS (Top Right Items) --- */
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-left: 2.5rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+
+/* --- SCROLLABLE INFO SECTION --- */
+.info-section {
+  position: relative;
+  min-height: 80vh;
+  margin-top: 100vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10; 
+  padding: 0 2rem;
+  pointer-events: none;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3rem;
+  border-radius: 16px;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  pointer-events: auto;
+}
+
+.info-card h2 {
+  font-family: 'BBH Bartle', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 3px;
+  margin-bottom: 1.5rem;
+}
+
+.info-card p {
+  font-family: sans-serif;
+  line-height: 1.8;
+  color: #cccccc;
+  margin: 1rem 0;
+}
+
+/* --- FOOTER --- */
+.footer {
+  position: relative;
+  text-align: center;
+  padding: 2rem 0;
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  color: #666666;
+  z-index: 10;
+  pointer-events: none;
+}
+
