@@ -1,5 +1,7 @@
 html {
   scroll-behavior: smooth;
+  font-family: 'BBH Bartle';
+  font-size: 16px;
 }
 
 .landing {
@@ -205,30 +207,58 @@ h1{
   align-items: center;
 }
 
-.nav-links a {
-  color: #ffffff;
-  text-decoration: none;
-  font-family: sans-serif;
-  font-weight: 600;
+.nav-links .nav-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.65); /* Soft, slightly faded white by default */
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit; /* Inherits your global project font */
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  outline: none;
   text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
-  margin-left: 2.5rem;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
+  letter-spacing: 0.05em;
 }
 
-.nav-links a:hover {
-  opacity: 1;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+/* Hover Effect: Turns bright white and gives a faint starry glow */
+.nav-links .nav-btn:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.nav-links .nav-btn.active {
+  color: #ffffff;
+  text-shadow: 
+    0 0 4px #ffffff,
+    0 0 12px rgba(255, 255, 255, 0.8),
+    0 0 20px rgba(0, 212, 255, 0.4); 
 }
 
 
+.nav-links .nav-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-links .nav-btn.active::after {
+  width: 70%;
+  left: 15%;
+}
 /* --- SCROLLABLE INFO SECTION --- */
 .info-section {
   position: relative;
   min-height: 80vh;
-  margin-top: 100vh; 
+  margin-top: 10vh; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -238,16 +268,12 @@ h1{
 }
 
 .info-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px); 
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  
   padding: 3rem;
   border-radius: 16px;
   max-width: 600px;
   text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-  pointer-events: auto;
+  
 }
 
 .info-card h2 {
